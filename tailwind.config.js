@@ -16,4 +16,8 @@ export default {
     },
   },
   plugins: [],
+  future: {
+    // Fixes weird toggled focus behavior in mobile
+    hoverOnlyWhenSupported: true,
+  },
 }
