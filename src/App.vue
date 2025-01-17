@@ -5,7 +5,7 @@ import AppToolbar from '@/components/AppToolbar.vue';
 </script>
 
 <template>
-  <div class="h-screen w-screen overflow-hidden grid grid-cols-[min-content]">
+  <div class="h-screen w-screen overflow-hidden flex flex-col md:grid grid-cols-[min-content]">
     <AppHeader class="col-span-2" />
   
     <AppToolbar>
