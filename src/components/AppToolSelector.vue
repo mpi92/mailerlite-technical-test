@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import AppStringTextIcon from '@/icons/AppStringTextIcon.vue';
 import AppImageIcon from '@/icons/AppImageIcon.vue';
+import type { ToolType } from '@/types';
 
 const props = defineProps<{
-  type: string,
+  type: ToolType,
 }>();
 
 const IconComponent = {
@@ -15,7 +16,6 @@ const IconComponent = {
 <template>
   <div class="flex flex-col items-center justify-center p-2 cursor-pointer group">
     <component
-      v-if="IconComponent"
       :is="IconComponent"
       :class="[
         'w-8 h-8 md:w-10 md:h-10',

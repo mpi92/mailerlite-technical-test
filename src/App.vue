@@ -1,43 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
 
 // Components
 import AppHeader from '@/components/AppHeader.vue';
 import AppToolbar from '@/components/AppToolbar.vue';
 import AppToolSelector from '@/components/AppToolSelector.vue';
 
-// Config
-import defaultBlockImages from '@/config/defaultBlockImages';
+// Utils
+import getDefaultBlockValue from '@/utils/getDefaultBlockValue';
 
 // Types
-import type { ResultPayload, ToolType } from '@/types';
+import {
+  ToolType,
+  type ValidBlockData,
+} from '@/types';
 
 const availableTools: ToolType[] = [
-  'text',
-  'image',
+  ToolType.Text,
+  ToolType.Image,
 ];
 
-const blocks = ref(new Set());
+const blocks: Ref<
+  Set<ValidBlockData>
+> = ref(new Set());
 
 function addBlock(tool: ToolType) {
-  const defaultBlockValues: ResultPayload = {
-    // Text block
-    text: {
-      type: 'text',
-      data: {
-        text: 'Insert text here...',
-      },
-    },
-    // Image block
-    image: {
-      type: 'image',
-      data: {
-        url: defaultBlockImages[0],
-      },
-    },
-  };
+  const blockData = getDefaultBlockValue(tool);
 
-  blocks.value.add(defaultBlockValues[tool]);
+  if (!blockData) return;
+
+  blocks.value.add(blockData);
 }
 
 function saveChanges() {
