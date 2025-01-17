@@ -38,9 +38,16 @@ function addBlock(tool: ToolType) {
   };
 
   blocks.value.add(defaultBlockValues[tool]);
+}
 
-  // Log result
-  console.log(JSON.stringify(Array.from(blocks.value), null, 2));
+function saveChanges() {
+  const data = JSON.stringify(
+    Array.from(blocks.value),
+    null,
+    2,
+  );
+
+  console.log(data);
 }
 </script>
 
@@ -56,6 +63,18 @@ function addBlock(tool: ToolType) {
         @click="addBlock(tool)"
         class="first:-ml-2 md:first:ml-0"
       />
+
+      <button
+        type="button"
+        :class="[
+          'ml-auto md:ml-0 md:mt-auto md:mb-10',
+          'bg-main-500 text-white hover:bg-main-600',
+          'rounded-md p-2 transition-colors'
+        ]"
+        @click="saveChanges"
+      >
+        Save
+      </button>
     </AppToolbar>
 
     <section :class="[
