@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import AppHeader from './components/AppHeader.vue';
+// Components
+import AppHeader from '@/components/AppHeader.vue';
+import AppToolbar from '@/components/AppToolbar.vue';
 </script>
 
 <template>
   <div class="h-screen w-screen overflow-hidden grid grid-cols-[min-content]">
     <AppHeader class="col-span-2" />
   
-    <div class="col-start-1">toolbar</div>
+    <AppToolbar>
+      toolbar
+    </AppToolbar>
 
     <section :class="[
       'flex flex-col items-center gap-2',
