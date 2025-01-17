@@ -9,15 +9,18 @@ import AppToolSelector from '@/components/AppToolSelector.vue';
 // Config
 import defaultBlockImages from '@/config/defaultBlockImages';
 
-const availableTools = [
+// Types
+import type { ResultPayload, ToolType } from '@/types';
+
+const availableTools: ToolType[] = [
   'text',
   'image',
 ];
 
 const blocks = ref(new Set());
 
-function addBlock(tool: string) {
-  const defaultBlockValues = {
+function addBlock(tool: ToolType) {
+  const defaultBlockValues: ResultPayload = {
     // Text block
     text: {
       type: 'text',
