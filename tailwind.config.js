@@ -8,8 +8,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        'main-500': '#09c269',
-        'main-600': '#079b54',
+        'main-500': '#09C269',
+        'main-600': '#079B54',
+        'gray-800': '#353537',
+        'gray-900': '#181819',
       },
     },
   },
