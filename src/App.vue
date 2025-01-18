@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, type Ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 // Components
 import AppHeader from '@/components/AppHeader.vue';
@@ -9,6 +9,7 @@ import AppBlock from '@/components/blocks/AppBlock.vue';
 
 // Utils
 import getDefaultBlockValue from '@/utils/getDefaultBlockValue';
+import Sortable from 'sortablejs';
 
 // Types
 import {
@@ -21,31 +22,48 @@ const availableTools: ToolType[] = [
   ToolType.Image,
 ];
 
-const blocks: Ref<
-  Set<ValidBlockData>
-> = ref(new Set());
+const blocks = ref<ValidBlockData[]>([]);
+const sortableBlocksRef = ref<HTMLElement | null>(null);
+const blocksListUpdateKey = ref(0);
 
 function addBlock(tool: ToolType) {
   const blockData = getDefaultBlockValue(tool);
 
   if (!blockData) return;
 
-  blocks.value.add(blockData);
+  blocks.value.push(blockData);
 }
 
-function removeBlock(block: ValidBlockData) {
-  blocks.value.delete(block);
+function removeBlock(index: number) {
+  blocks.value.splice(index, 1);
 }
 
 function saveChanges() {
-  const data = JSON.stringify(
-    Array.from(blocks.value),
-    null,
-    2,
-  );
-
-  console.log(data);
+  console.table(blocks.value);
 }
+
+function onDragEnd(evt: Sortable.SortableEvent) {
+  if (evt.oldIndex === evt.newIndex) return;
+
+  // Remove the element from the old index
+  const [movedBlock] = blocks.value.splice(evt.oldIndex!, 1);
+
+  // Insert the element at the new index
+  blocks.value.splice(evt.newIndex!, 0, movedBlock);
+
+  blocksListUpdateKey.value += 1;
+}
+
+onMounted(() => {
+  if (!sortableBlocksRef.value) return;
+
+  Sortable.create(sortableBlocksRef.value, {
+    ghostClass: 'ghost',
+    handle: '.drag-handle',
+    animation: 150,
+    onEnd: onDragEnd,
+  });
+});
 </script>
 
 <template>
@@ -74,18 +92,21 @@ function saveChanges() {
       </button>
     </AppToolbar>
 
-    <section :class="[
-      'flex flex-col items-center gap-2',
-      'w-full h-full min-h-[calc(100vh-var(--header-height))] overflow-y-scroll',
-      'bg-gray-800 p-10 rounded-tl-xs',
-    ]">
+    <section
+      ref="sortableBlocksRef"
+      :class="[
+        'flex flex-col items-center gap-2',
+        'w-full h-full min-h-[calc(100vh-var(--header-height))] overflow-y-scroll',
+        'bg-gray-800 p-10 rounded-tl-xs',
+      ]"
+    >
       <AppBlock
         v-for="block, idx in blocks"
-        :key="idx"
+        :key="`${idx}_${blocksListUpdateKey}`"
         class="w-full max-w-screen-sm"
         :type="block.type"
         v-model="block.data"
-        @remove="removeBlock(block)"
+        @remove="removeBlock(idx)"
       />
     </section>
   </div>
