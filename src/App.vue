@@ -70,7 +70,7 @@ onMounted(() => {
   <div class="h-screen w-screen overflow-hidden flex flex-col md:grid grid-cols-[min-content]">
     <AppHeader class="col-span-2 shrink-0" />
   
-    <AppToolbar>
+    <AppToolbar class="shrink-0 order-2 md:order-none">
       <AppToolSelector
         v-for="tool in availableTools"
         :key="tool"
@@ -96,7 +96,7 @@ onMounted(() => {
       ref="sortableBlocksRef"
       :class="[
         'flex flex-col items-center gap-2',
-        'w-full h-full min-h-[calc(100vh-var(--header-height))] overflow-y-scroll',
+        'w-full h-full min-h-[calc(100vh-var(--header-height)*2)] overflow-y-scroll',
         'bg-gray-800 p-10 rounded-tl-xs',
       ]"
     >

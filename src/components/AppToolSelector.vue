@@ -14,7 +14,8 @@ const IconComponent = {
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center p-2 cursor-pointer group">
+  <div class="relative flex flex-col items-center justify-center p-2 cursor-pointer group">
+    <span class="absolute top-0 right-0 text-yellow-500">+</span>
     <component
       :is="IconComponent"
       :class="[
