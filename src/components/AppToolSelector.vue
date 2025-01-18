@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppStringTextIcon from '@/icons/AppStringTextIcon.vue';
-import AppImageIcon from '@/icons/AppImageIcon.vue';
+import AppStringTextIcon from '@/components/icons/AppStringTextIcon.vue';
+import AppImageIcon from '@/components/icons/AppImageIcon.vue';
 import type { ToolType } from '@/types';
 
 const props = defineProps<{

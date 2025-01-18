@@ -1,5 +1,5 @@
 // Tools
-export const enum ToolType {
+export enum ToolType {
   Text = 'text',
   Image = 'image',
 }
@@ -20,8 +20,8 @@ export interface ImageBlockData {
 }
 
 export type BlockDataMap = {
-  text?: TextBlockData;
-  image?: ImageBlockData;
+  [ToolType.Text]?: TextBlockData;
+  [ToolType.Image]?: ImageBlockData;
 };
 
 export type ValidBlockData = TextBlockData | ImageBlockData;

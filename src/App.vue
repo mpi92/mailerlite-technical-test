@@ -5,6 +5,7 @@ import { ref, type Ref } from 'vue';
 import AppHeader from '@/components/AppHeader.vue';
 import AppToolbar from '@/components/AppToolbar.vue';
 import AppToolSelector from '@/components/AppToolSelector.vue';
+import AppBlock from '@/components/blocks/AppBlock.vue';
 
 // Utils
 import getDefaultBlockValue from '@/utils/getDefaultBlockValue';
@@ -30,6 +31,10 @@ function addBlock(tool: ToolType) {
   if (!blockData) return;
 
   blocks.value.add(blockData);
+}
+
+function removeBlock(block: ValidBlockData) {
+  blocks.value.delete(block);
 }
 
 function saveChanges() {
@@ -74,7 +79,14 @@ function saveChanges() {
       'w-full h-full min-h-[calc(100vh-var(--header-height))] overflow-y-scroll',
       'bg-gray-800 p-10 rounded-tl-xs',
     ]">
-      content
+      <AppBlock
+        v-for="block, idx in blocks"
+        :key="idx"
+        class="w-full max-w-screen-sm"
+        :type="block.type"
+        v-model="block.data"
+        @remove="removeBlock(block)"
+      />
     </section>
   </div>
 </template>
