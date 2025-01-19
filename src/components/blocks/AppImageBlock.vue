@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 import AppBlockActionButton from './AppBlockActionButton.vue';
 import type { ImageBlockData } from '@/types';
@@ -11,15 +11,14 @@ const props = defineProps<{
 
 const emit = defineEmits(['remove', 'duplicate', 'update:modelValue']);
 
-const selectedImageIndex = ref(defaultBlockImages.indexOf(props.modelValue.url));
-const selectedImageSrc = computed(() => defaultBlockImages[selectedImageIndex.value]);
+const selectedImageSrc = ref(
+  defaultBlockImages[defaultBlockImages.indexOf(props.modelValue.url)],
+);
 
-function changeImage() {
-  const nextIndex = selectedImageIndex.value + 1 === defaultBlockImages.length
-    ? 0
-    : selectedImageIndex.value + 1;
+function changeImage(src: string) {
+  if (selectedImageSrc.value === src) return;
 
-  selectedImageIndex.value = nextIndex;
+  selectedImageSrc.value = src;
 
   emit('update:modelValue', { ...props.modelValue, url: selectedImageSrc.value });
 }
@@ -27,10 +26,6 @@ function changeImage() {
 
 <template>
   <div data-testid="imageBlock" class="flex gap-2 justify-end">
-    <AppBlockActionButton
-      action="change"
-      @click="changeImage()"
-    />
     <AppBlockActionButton
       action="duplicate"
       @click="$emit('duplicate')"
@@ -41,6 +36,19 @@ function changeImage() {
     />
   </div>
 
+  <div class="flex gap-2 mt-4">
+    <img
+      v-for="imageSrc, idx in defaultBlockImages"
+      :key="idx"
+      :src="imageSrc"
+      :class="[
+        'w-12 h-12 cursor-pointer object-cover',
+        { 'rounded border border-green-500': imageSrc === selectedImageSrc },
+      ]"
+      @click="changeImage(imageSrc)"
+    />
+  </div>
+  
   <img
     :src="selectedImageSrc"
     alt="Image block"
