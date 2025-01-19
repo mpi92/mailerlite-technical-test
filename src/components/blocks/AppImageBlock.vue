@@ -26,7 +26,7 @@ function changeImage() {
 </script>
 
 <template>
-  <div class="flex gap-2 justify-end">
+  <div data-testid="imageBlock" class="flex gap-2 justify-end">
     <AppBlockActionButton
       action="change"
       @click="changeImage()"

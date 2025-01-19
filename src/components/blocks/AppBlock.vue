@@ -26,10 +26,16 @@ watch(data, () => {
 </script>
 
 <template>
-  <div class="app-block relative bg-gray-900 rounded p-4 pt-10 shadow">
-    <div class="absolute top-0 left-0 w-full flex justify-end bg-main-800 rounded-t drag-handle cursor-move">
+  <div
+    data-testid="block"
+    class="app-block relative bg-gray-900 rounded p-4 pt-10 shadow"
+  >
+    <button
+      aria-label="Block Drag Handle"
+      class="absolute top-0 left-0 w-full flex justify-end bg-main-800 rounded-t drag-handle cursor-move"
+    >
       <AppDragIcon class="text-main-500 h-4 md:h-6" />
-    </div>
+    </button>
 
     <AppTextBlock
       v-if="type === ToolType.Text"

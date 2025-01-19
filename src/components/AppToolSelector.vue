@@ -14,7 +14,10 @@ const IconComponent = {
 </script>
 
 <template>
-  <div class="relative flex flex-col items-center justify-center p-2 cursor-pointer group">
+  <button
+    type="button"
+    class="relative flex flex-col items-center justify-center p-2 cursor-pointer group"
+  >
     <span class="absolute top-0 right-0 text-yellow-500">+</span>
     <component
       :is="IconComponent"
@@ -23,8 +26,8 @@ const IconComponent = {
         'text-main-500 group-hover:text-main-600 transition-colors',
       ]"
     />
-    <p class="capitalize text-sm md:text-base">
+    <span class="capitalize text-sm md:text-base">
       {{ type }}
-    </p>
-  </div>
+    </span>
+  </button>
 </template>

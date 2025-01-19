@@ -93,6 +93,7 @@ onMounted(() => {
     </AppToolbar>
 
     <section
+      aria-label="Main Content"
       ref="sortableBlocksRef"
       :class="[
         'flex flex-col items-center gap-2',
