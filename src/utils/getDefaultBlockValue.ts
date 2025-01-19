@@ -7,7 +7,7 @@ export default function getDefaultBlockValue(tool: ToolType) {
     text: {
       type: ToolType.Text,
       data: {
-        text: 'Insert text here...',
+        text: '',
       },
     },
     // Image block

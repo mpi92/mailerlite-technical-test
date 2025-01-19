@@ -31,7 +31,21 @@ test.describe('Blocks', () => {
     expect(blocks.at(0)!.getByTestId('textBlock')).toBeVisible();
   });
 
-  test('Removes an existimg Text block', async ({ page }) => {
+  test('Duplicates an existing Text block', async ({ page }) => {
+    await createBlock(page, 'Text');
+
+    let blocks = await getBlockItemsInPage(page);
+
+    const textBlock = blocks.at(0)!.getByTestId('textBlock');
+
+    await textBlock.getByRole('button', { name: 'duplicate' }).click();
+
+    blocks = await getBlockItemsInPage(page);
+
+    expect(blocks.length).toBe(2);
+  });
+
+  test('Removes an existing Text block', async ({ page }) => {
     await createBlock(page, 'Text');
 
     let blocks = await getBlockItemsInPage(page);
@@ -53,7 +67,21 @@ test.describe('Blocks', () => {
     expect(blocks.at(0)!.getByTestId('imageBlock')).toBeVisible();
   });
 
-  test('Removes an existimg Image block', async ({ page }) => {
+  test('Duplicates an existing Image block', async ({ page }) => {
+    await createBlock(page, 'Image');
+
+    let blocks = await getBlockItemsInPage(page);
+
+    const textBlock = blocks.at(0)!.getByTestId('imageBlock');
+
+    await textBlock.getByRole('button', { name: 'duplicate' }).click();
+
+    blocks = await getBlockItemsInPage(page);
+
+    expect(blocks.length).toBe(2);
+  });
+
+  test('Removes an existing Image block', async ({ page }) => {
     await createBlock(page, 'Image');
 
     let blocks = await getBlockItemsInPage(page);

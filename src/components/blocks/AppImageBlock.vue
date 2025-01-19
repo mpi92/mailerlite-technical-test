@@ -9,7 +9,7 @@ const props = defineProps<{
   modelValue: ImageBlockData['data'],
 }>();
 
-const emit = defineEmits(['remove', 'update:modelValue']);
+const emit = defineEmits(['remove', 'duplicate', 'update:modelValue']);
 
 const selectedImageIndex = ref(defaultBlockImages.indexOf(props.modelValue.url));
 const selectedImageSrc = computed(() => defaultBlockImages[selectedImageIndex.value]);
@@ -31,7 +31,10 @@ function changeImage() {
       action="change"
       @click="changeImage()"
     />
-
+    <AppBlockActionButton
+      action="duplicate"
+      @click="$emit('duplicate')"
+    />
     <AppBlockActionButton
       action="remove"
       @click="$emit('remove')"

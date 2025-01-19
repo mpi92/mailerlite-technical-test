@@ -16,7 +16,7 @@ const props = defineProps<{
   modelValue: ValidBlockData['data'],
 }>();
 
-const emit = defineEmits(['remove', 'update:modelValue']);
+const emit = defineEmits(['remove', 'duplicate', 'update:modelValue']);
 
 const data = ref(props.modelValue);
 
@@ -40,12 +40,14 @@ watch(data, () => {
     <AppTextBlock
       v-if="type === ToolType.Text"
       v-model="(data as TextBlockData['data'])"
+      @duplicate="$emit('duplicate')"
       @remove="$emit('remove')"
     />
 
     <AppImageBlock
       v-else-if="type === ToolType.Image"
       v-model="(data as ImageBlockData['data'])"
+      @duplicate="$emit('duplicate')"
       @remove="$emit('remove')"
     />
   </div>

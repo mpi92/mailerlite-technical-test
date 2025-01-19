@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import AppRenewIcon from '@/components/icons/AppRenewIcon.vue';
 import AppTrashCanIcon from '@/components/icons/AppTrashCanIcon.vue';
+import AppDuplicateIcon from '@/components/icons/AppDuplicateIcon.vue';
 
-type BlockButtonAction = 'change' | 'remove';
+type BlockButtonAction = 'change' | 'duplicate' | 'remove';
 
 const props = defineProps<{
   action: BlockButtonAction,
@@ -11,6 +12,7 @@ const props = defineProps<{
 const IconComponent = {
   change: AppRenewIcon,
   remove: AppTrashCanIcon,
+  duplicate: AppDuplicateIcon,
 }[props.action];
 </script>
 

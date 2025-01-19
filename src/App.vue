@@ -34,12 +34,22 @@ function addBlock(tool: ToolType) {
   blocks.value.push(blockData);
 }
 
+function duplicateBlock(index: number) {
+  blocks.value.splice(
+    index,
+    0,
+    { ...blocks.value[index] },
+  );
+  blocksListUpdateKey.value += 1;
+}
+
 function removeBlock(index: number) {
   blocks.value.splice(index, 1);
+  blocksListUpdateKey.value += 1;
 }
 
 function saveChanges() {
-  console.table(blocks.value);
+  alert(JSON.stringify(blocks.value, null, 2));
 }
 
 function onDragEnd(evt: Sortable.SortableEvent) {
@@ -108,6 +118,7 @@ onMounted(() => {
         :type="block.type"
         v-model="block.data"
         @remove="removeBlock(idx)"
+        @duplicate="duplicateBlock(idx)"
       />
     </section>
   </div>

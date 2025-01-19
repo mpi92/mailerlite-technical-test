@@ -8,7 +8,7 @@ const props = defineProps<{
   modelValue: TextBlockData['data'],
 }>();
 
-const emit = defineEmits(['remove', 'update:modelValue']);
+const emit = defineEmits(['remove', 'duplicate', 'update:modelValue']);
 
 const textValue = ref(props.modelValue.text);
 
@@ -19,7 +19,11 @@ watch(textValue, () => {
 
 <template>
   <div data-testid="textBlock">
-    <div class="flex justify-end">
+    <div class="flex justify-end gap-2">
+      <AppBlockActionButton
+        action="duplicate"
+        @click="$emit('duplicate')"
+      />
       <AppBlockActionButton
         action="remove"
         @click="$emit('remove')"
@@ -29,6 +33,7 @@ watch(textValue, () => {
     <textarea
       v-model="textValue"
       aria-label="Text Block Content"
+      placeholder="Insert text here..."
       :class="[
         'w-full min-h-16 md:min-h-32',
         'focus:outline-none rounded border border-transparent focus:border-main-500/50 focus:bg-gray-900 resize-none',
