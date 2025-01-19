@@ -43,12 +43,13 @@ function changeImage(src: string) {
       :src="imageSrc"
       :class="[
         'w-12 h-12 cursor-pointer object-cover',
-        { 'rounded border border-green-500': imageSrc === selectedImageSrc },
+        { 'rounded border-2 border-green-500': imageSrc === selectedImageSrc },
+        { 'saturate-0': imageSrc !== selectedImageSrc },
       ]"
       @click="changeImage(imageSrc)"
     />
   </div>
-  
+
   <img
     :src="selectedImageSrc"
     alt="Image block"
