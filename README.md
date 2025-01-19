@@ -1,18 +1,16 @@
 # mailerlite-technical-test
 
-This template should help get you started developing with Vue 3 in Vite.
+Build a simple drag & drop landing page builder using any of Vue.js, Angular, React. Extra points for using Vue.js.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
+Requirements:
+- Create 2 draggable blocks: Text and Image.
+- The content of Text block should be editable.
+- Image block can be edited by selecting one of the 3-4 predefined images.
+- The user should be able to rearrange, duplicate and delete blocks.
+- Landing page data like the text content, links to images, block order, etc. should be exported to a JSON format when the user clicks the  “Save” button (console.log is enough).
+- Style the application using CSS or a CSS framework of your choice (e.g., Tailwind CSS).
+- The application should be responsive.
+- Test cases are a bonus.
 
 ## Project Setup
 
@@ -24,12 +22,6 @@ pnpm install
 
 ```sh
 pnpm dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-pnpm build
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
@@ -55,10 +47,4 @@ pnpm test:e2e --project=chromium
 pnpm test:e2e tests/example.spec.ts
 # Runs the tests in debug mode
 pnpm test:e2e --debug
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-pnpm lint
 ```
